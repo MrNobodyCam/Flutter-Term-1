@@ -1,13 +1,13 @@
 void main() {
   // 1 - iLike
-  String iLike = 'I like pizza';
+  const iLike = 'I like pizza';
 
   // 2 - toppings
-  String toppings = 'with tomatoes';
+  var toppings = 'with tomatoes';
   toppings += " and cheese";
 
   // 3 - message
-  String message = '$iLike $toppings';
+  final message = '$iLike $toppings';
   print(message);
 
   // 4 - rbgColors
@@ -20,9 +20,7 @@ void main() {
   print(weekDays);
 
   // 6 - scores
-  List<int> scores = [45,35,50];
-  scores = [45,35,50, 78];
+  List<int> scores = [45, 35, 50];
+  scores = [45, 35, 50, 78];
   print(scores);
 }
-
-
