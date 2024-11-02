@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HobbyCard extends StatelessWidget {
-  String title;
-  IconData icon;
-  Color? backgrounColor;
-  HobbyCard(
+  final String title;
+  final IconData icon;
+  final Color? backgrounColor;
+  const HobbyCard(
       {super.key,
       required this.title,
       required this.icon,

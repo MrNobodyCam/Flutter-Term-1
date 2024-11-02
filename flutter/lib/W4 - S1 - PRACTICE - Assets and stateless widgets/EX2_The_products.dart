@@ -26,8 +26,8 @@ enum Product {
 }
 
 class ProductCard extends StatelessWidget {
-  Product product;
-  ProductCard({super.key, required this.product});
+  final Product product;
+  const ProductCard({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
     return Card(
