@@ -1,15 +1,3 @@
-// import 'dart:math';
-//
-// import 'package:flutter/material.dart';
-// import 'randomImage.dart';
-//
-// void main() => runApp(const MaterialApp(
-//   home: Scaffold(
-//     backgroundColor: Colors.deepPurple,
-//     body: Center(child: DiceRoller()),
-//   ),
-// ));
-
 import 'package:flutter/material.dart';
 
 enum Type {
