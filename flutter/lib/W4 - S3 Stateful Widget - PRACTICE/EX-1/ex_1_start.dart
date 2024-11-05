@@ -19,6 +19,7 @@ enum ButtonType {
       required this.backgroundColor});
 }
 
+// ignore: must_be_immutable
 class Button extends StatefulWidget {
   ButtonType type;
   Button({super.key, required this.type});
