@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lutter/W5%20-%20S1%20-%20PRACTICE-%20Lists,%20Pass%20Functions/EXERCISE-4/jokes.dart'; // Import the jokes.dart
+import 'package:lutter/W5-S2%20PRACTICE/EXERCISE-4/jokes.dart';
 
 Color appColor = Colors.green[300]!;
 

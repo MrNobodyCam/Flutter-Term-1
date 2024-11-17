@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lutter/W5%20-%20S1%20-%20PRACTICE-%20Lists,%20Pass%20Functions/EXERCISE-2/model/profile_tile_model.dart';
+import 'package:lutter/W5-S2%20PRACTICE/EXERCISE-2/model/profile_tile_model.dart';
 
 ProfileData vichetProfile = ProfileData(
     name: "Vichet",
