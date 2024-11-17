@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:test1/W5-S2-List-Inputs/1%20-%20START%20CODE/EXERCISE-3/screen/welcome.dart';
+import 'package:lutter/W5%20-%20S1%20-%20PRACTICE-%20Lists,%20Pass%20Functions/EXERCISE-3/screen/temperature.dart';
+import 'package:lutter/W5%20-%20S1%20-%20PRACTICE-%20Lists,%20Pass%20Functions/EXERCISE-3/screen/welcome.dart';
 
 class TemperatureApp extends StatefulWidget {
   const TemperatureApp({super.key});
 
   @override
-  State<TemperatureApp> createState() {
-    return _TemperatureAppState();
-  }
+  State<TemperatureApp> createState() => _TemperatureAppState();
 }
 
 class _TemperatureAppState extends State<TemperatureApp> {
-  
-  @override
-  Widget build(context) {
+  bool isClicked = false;
+  void checkClick() {
+    setState(() {
+      isClicked = !isClicked;
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xff16C062),
-                Color(0xff00BCDC),
-              ],
+              colors: [Color(0xff16C062), Color(0xff00BCDC)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
-          child: const Welcome(),
+          child: isClicked ? Temperature() : Welcome(checkClick: checkClick),
         ),
       ),
     );
