@@ -77,5 +77,3 @@ class _TemperatureState extends State<Temperature> {
     );
   }
 }
-
-class _controller {}
