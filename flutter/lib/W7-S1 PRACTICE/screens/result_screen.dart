@@ -127,12 +127,10 @@ class Correction extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ...answers.map((textAnswer) {
-          // Default to incorrect style
           Color textColor = Colors.black;
           FontWeight textWeight = FontWeight.normal;
           Icon icon = const Icon(Icons.check);
           Color iconColor = Colors.blue;
-          // Check if the answer is correct
           if (textAnswer == correctAnswer) {
             textColor = CheckResult.correct.textColor;
             textWeight = CheckResult.correct.textWeight;
