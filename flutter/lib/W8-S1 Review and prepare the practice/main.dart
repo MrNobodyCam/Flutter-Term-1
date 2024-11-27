@@ -36,14 +36,7 @@ void main() {
             Expanded(
               child: Container(
                 color: Colors.blue.shade200,
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    // Expense(title: "Kao Vichet", amount: 123, date: DateTime(2024), category: ExpenseType.FOOD);
-                    // ExpenseItem(expense: expense1)
-                    ExpenseList(expenseList: listExpense),
-                  ],
-                ),
+                child: ExpenseList(expenseList: listExpense),
               ),
             )
           ],
@@ -97,18 +90,11 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            ...expenseList.asMap().entries.map((entry) {
-              final expense = entry.value;
-              // final userAnswer = submission.getAnswerFor(question)?.questionAnswer ?? '';
-              return ExpenseItem(expense: expense);
-            }),
-          ],
-        )
-      ],
+    return ListView.builder(
+      itemCount: expenseList.length,
+      itemBuilder: (context, index) {
+        return ExpenseItem(expense: expenseList[index]);
+      },
     );
   }
 }
