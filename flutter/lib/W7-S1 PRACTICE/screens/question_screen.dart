@@ -25,8 +25,7 @@ class QuestionScreen extends StatelessWidget {
         ...question.possibleAnswers.map((answer) {
           return AnswerButton(
             text: answer,
-            onPressed: () =>
-                onAnswerSelected(answer), // Pass the selected answer
+            onPressed: () => onAnswerSelected(answer),
           );
         }),
       ],
