@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
- 
+
+enum Device { euro, riels, dong }
+
 class DeviceConverter extends StatefulWidget {
   const DeviceConverter({super.key});
 
@@ -8,18 +10,48 @@ class DeviceConverter extends StatefulWidget {
 }
 
 class _DeviceConverterState extends State<DeviceConverter> {
- 
+  String dropdownValue = Device.values.first.name;
+  List<String> device = Device.values.map((e) => e.name).toList();
+  final _valueController = TextEditingController();
+  double amountDevice = 0.0;
   final BoxDecoration textDecoration = BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(12),
   );
- 
+  void Convert() {
+    double amount = double.tryParse(_valueController.text) ?? 0.0;
+    setState(() {
+      switch (dropdownValue) {
+        case "euro":
+          {
+            amountDevice = amount * 0.95;
+            break;
+          }
+        case "riels":
+          {
+            amountDevice = amount * 4100;
+            break;
+          }
+        case "dong":
+          {
+            amountDevice = amount * 25346.49;
+            break;
+          }
+        default:
+          {
+            amountDevice = 0;
+            break;
+          }
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _valueController.addListener(Convert);
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,8 +75,8 @@ class _DeviceConverterState extends State<DeviceConverter> {
           const SizedBox(height: 50),
           const Text("Amount in dollars:"),
           const SizedBox(height: 10),
-
           TextField(
+              controller: _valueController,
               decoration: InputDecoration(
                   prefix: const Text('\$ '),
                   enabledBorder: OutlineInputBorder(
@@ -55,18 +87,29 @@ class _DeviceConverterState extends State<DeviceConverter> {
                   hintText: 'Enter an amount in dollar',
                   hintStyle: const TextStyle(color: Colors.white)),
               style: const TextStyle(color: Colors.white)),
-
           const SizedBox(height: 30),
-          const Text("Device: (TODO !)"),
-       
-
-          const SizedBox(height: 30),
-          const Text("Amount in selected device:"),
+          const Text("Device:"),
+          DropdownButton(
+              value: dropdownValue,
+              items: device.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    dropdownValue = newValue;
+                    Convert();
+                  });
+                }
+              }),
           const SizedBox(height: 10),
           Container(
               padding: const EdgeInsets.all(10),
               decoration: textDecoration,
-              child: const Text('TODO !'))
+              child: Text('$amountDevice'))
         ],
       )),
     );
