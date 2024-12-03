@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import '../../models/expense.dart';
 
 class ExpenseForm extends StatefulWidget {
@@ -51,17 +52,55 @@ class _ExpenseFormState extends State<ExpenseForm> {
     Expense expense = Expense(
         title: title,
         amount: amount,
-        date: selectedDate!, //  TODO :  For now it s a fake data
+        date: selectedDate!,
         category: Category.values.firstWhere(
           (e) => e.name == dropdownValue,
           orElse: () => Category.values.first,
-        )); //  TODO :  For now it s a fake data
+        ));
 
     // 3- Ask the parent to add the expense
     widget.onCreated(expense);
 
     // 4- Close modal
     Navigator.pop(context);
+  }
+
+  void dateTimePick() async {
+    DateTime? date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDate: DateTime.now(),
+    );
+    if (date != null) {
+      setState(() {
+        selectedDate = date;
+      });
+    }
+    // setState(() {
+    //   // DatePicker.showDatePicker(
+    //   //   context,
+    //   //   showTitleActions: true,
+    //   //   currentTime: DateTime.now(),
+    //   //   minTime: DateTime(2000),
+    //   //   maxTime: DateTime(3000),
+    //   //   onChanged: (val) {
+    //   //     setState(() {
+    //   //       selectedDate = DateTime.tryParse(val as String);
+    //   //     });
+    //   //   },
+    //   // );
+    //   // DateTimePicker(
+    //   //   initialValue: null,
+    //   //   firstDate: DateTime(2000),
+    //   //   lastDate: DateTime(2100),
+    //   //   onChanged: (val) {
+    //   //     setState(() {
+    //   //       selectedDate = DateTime.tryParse(val);
+    //   //     });
+    //   //   },
+    //   // );
+    // });
   }
 
   @override
@@ -81,7 +120,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
           Row(
             children: [
               SizedBox(
-                  width: 270,
+                  width: 300,
                   child: Container(
                     margin: EdgeInsets.only(top: 20),
                     child: TextField(
@@ -99,38 +138,21 @@ class _ExpenseFormState extends State<ExpenseForm> {
                   )),
               Spacer(),
               SizedBox(
-                width: 180,
+                width: 160,
                 height: 50,
                 child: Row(
                   children: [
+                    if (selectedDate == null)
+                      Text("No Date Selected")
+                    else
+                      (Text(
+                          "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}")),
                     Container(
-                      width: 150,
-                      child: Theme(
-                        data: ThemeData(
-                            inputDecorationTheme: InputDecorationTheme(
-                          border: InputBorder.none,
-                        )),
-                        child: DateTimePicker(
-                          initialValue: null,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                          dateHintText: 'No Data Selected',
-                          // decoration: InputDecoration(border: under),
-                          onChanged: (val) {
-                            setState(() {
-                              selectedDate = DateTime.tryParse(val);
-                            });
-                          },
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return 'Please select a date';
-                            }
-                            return null;
-                          },
-                        ),
+                      child: IconButton(
+                        onPressed: dateTimePick,
+                        icon: Icon(Icons.calendar_month),
                       ),
                     ),
-                    Icon(Icons.calendar_month),
                   ],
                 ),
               )
