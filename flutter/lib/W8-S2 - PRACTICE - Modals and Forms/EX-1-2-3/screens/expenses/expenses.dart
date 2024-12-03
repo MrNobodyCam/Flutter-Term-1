@@ -30,10 +30,17 @@ class _ExpensesState extends State<Expenses> {
   ];
 
   Expense? _lastRemovedExpense;
-
+  int index = 0;
   void onExpenseRemoved(Expense expense) {
     setState(() {
+      // for (Expense index in _registeredExpenses) {
+      //   if (expense == index) {
+      //     _lastRemovedExpense = index;
+      //   }
+      // }
       _lastRemovedExpense = expense;
+      index = _registeredExpenses.indexOf(expense);
+      // print(index);
       _registeredExpenses.remove(expense);
     });
 
@@ -44,7 +51,13 @@ class _ExpensesState extends State<Expenses> {
           label: 'Undo',
           onPressed: () {
             setState(() {
-              _registeredExpenses.add(_lastRemovedExpense!);
+              // for (Expense size in _registeredExpenses) {
+              //   if (_registeredExpenses.indexOf(size) == index) {
+              //     _registeredExpenses.insert(_lastRemovedExpense!,index);
+              //   }
+              // }
+              _registeredExpenses.insert(index, _lastRemovedExpense!);
+              // _registeredExpenses.add(_lastRemovedExpense!);
             });
           },
         ),
